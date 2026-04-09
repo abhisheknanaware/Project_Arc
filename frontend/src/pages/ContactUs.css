@@ -1,0 +1,115 @@
+.contact-container {
+  padding: 4rem 10%;
+  display: flex;
+  justify-content: center;
+}
+
+.contact-wrapper {
+  display: grid;
+  grid-template-columns: 1fr;
+  max-width: 1100px;
+  width: 100%;
+  overflow: hidden;
+}
+
+@media (min-width: 800px) {
+  .contact-wrapper {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.contact-info {
+  background: linear-gradient(145deg, rgba(88, 166, 255, 0.1), rgba(13, 17, 23, 0.6));
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  border-right: 1px solid var(--border-color);
+}
+
+.contact-form-side {
+  padding: 3rem;
+}
+
+.contact-form-side h3 {
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+  color: white;
+}
+
+.subtitle {
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.info-items {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.info-item .icon {
+  font-size: 2rem;
+  color: var(--accent-color);
+  background: rgba(88, 166, 255, 0.1);
+  padding: 0.5rem;
+  border-radius: 50%;
+}
+
+.info-item strong {
+  display: block;
+  color: var(--text-primary);
+  margin-bottom: 0.25rem;
+}
+
+.info-item p {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.form-row {
+  display: flex;
+  gap: 1rem;
+}
+
+.form-row .input-group {
+  flex: 1;
+}
+
+textarea.input-field {
+  resize: vertical;
+}
+
+.radio-group {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+.radio-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.radio-label input[type="radio"] {
+  accent-color: var(--accent-color);
+  width: 18px;
+  height: 18px;
+}
+
+.status-message {
+  margin-top: 1rem;
+  text-align: center;
+  font-weight: 500;
+  color: var(--accent-color);
+}

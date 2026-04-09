@@ -1,0 +1,128 @@
+.home-container {
+  padding: 2rem 5%;
+}
+
+.map-view-wrapper {
+  display: flex;
+  gap: 2rem;
+  height: 600px;
+  flex-direction: column-reverse;
+}
+
+@media (min-width: 900px) {
+  .map-view-wrapper {
+    flex-direction: row;
+  }
+}
+
+.details-panel {
+  flex: 1;
+  padding: 2rem;
+  overflow-y: auto;
+  max-width: 400px;
+}
+
+.map-container {
+  flex: 3;
+  padding: 0;
+  overflow: hidden;
+  height: 100%;
+}
+
+.empty-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  text-align: center;
+  color: var(--text-secondary);
+  gap: 1rem;
+}
+
+.empty-panel h3 {
+  color: var(--text-primary);
+}
+
+.divider {
+  height: 1px;
+  background: var(--border-color);
+  margin: 1.5rem 0;
+}
+
+.detail-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.detail-item span {
+  color: var(--text-secondary);
+}
+
+.section-title {
+  color: var(--accent-color);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  margin-bottom: 1rem;
+}
+
+.cards-section {
+  margin-top: 4rem;
+}
+
+.grid-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.data-card {
+  padding: 1.5rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.data-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+  border-color: rgba(88, 166, 255, 0.4);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 1rem;
+}
+
+.card-header h4 {
+  font-size: 1.2rem;
+}
+
+.badge {
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.card-stat {
+  display: flex;
+  justify-content: space-between;
+}
+
+.card-stat span {
+  color: var(--text-secondary);
+}

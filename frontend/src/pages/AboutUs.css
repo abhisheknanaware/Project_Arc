@@ -1,0 +1,61 @@
+.about-container {
+  padding: 4rem 10%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.text-center {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.title .highlight {
+  color: var(--accent-color);
+}
+
+.underline {
+  height: 4px;
+  width: 80px;
+  background: linear-gradient(90deg, var(--accent-color), transparent);
+  margin: 0 auto;
+  border-radius: 2px;
+}
+
+.content-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 900px) {
+  .content-grid {
+    grid-template-columns: 3fr 2fr;
+  }
+}
+
+.text-content {
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  line-height: 1.8;
+  font-size: 1.1rem;
+}
+
+.journey-section {
+  padding: 2.5rem;
+  background: linear-gradient(145deg, rgba(22, 27, 34, 0.8), rgba(13, 17, 23, 0.9));
+  border: 1px solid rgba(88, 166, 255, 0.2);
+}
+
+.mt-4 {
+  margin-top: 1.5rem;
+  line-height: 1.8;
+  color: var(--text-secondary);
+}
