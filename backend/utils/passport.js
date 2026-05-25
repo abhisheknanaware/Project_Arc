@@ -31,7 +31,7 @@ const findOrCreateOAuthUser = async ({ email, name, avatar, provider, providerId
 };
 
 // ── Google Strategy ─────────────────────────────────────────────────────────
-const BACKEND_URL = `http://localhost:${process.env.PORT || 3002}`;
+const BACKEND_URL = process.env.BACKEND_URL || `http://localhost:${process.env.PORT || 3002}`;
 
 if (process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET) {
   passport.use(new GoogleStrategy(
