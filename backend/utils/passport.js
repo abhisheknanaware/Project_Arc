@@ -33,61 +33,69 @@ const findOrCreateOAuthUser = async ({ email, name, avatar, provider, providerId
 // ── Google Strategy ─────────────────────────────────────────────────────────
 const BACKEND_URL = `http://localhost:${process.env.PORT || 3002}`;
 
-passport.use(new GoogleStrategy(
-  {
-    clientID:     process.env.GOOGLE_CLIENT_ID,
-    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL:  `${BACKEND_URL}/api/auth/google/callback`,
-  },
-  async (accessToken, refreshToken, profile, done) => {
-    try {
-      const email  = profile.emails?.[0]?.value;
-      const name   = profile.displayName;
-      const avatar = profile.photos?.[0]?.value;
+if (process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET) {
+  passport.use(new GoogleStrategy(
+    {
+      clientID:     process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      callbackURL:  `${BACKEND_URL}/api/auth/google/callback`,
+    },
+    async (accessToken, refreshToken, profile, done) => {
+      try {
+        const email  = profile.emails?.[0]?.value;
+        const name   = profile.displayName;
+        const avatar = profile.photos?.[0]?.value;
 
-      if (!email) return done(new Error('No email from Google'), null);
+        if (!email) return done(new Error('No email from Google'), null);
 
-      const { token } = await findOrCreateOAuthUser({
-        email, name, avatar,
-        provider: 'google',
-        providerId: profile.id,
-      });
+        const { token } = await findOrCreateOAuthUser({
+          email, name, avatar,
+          provider: 'google',
+          providerId: profile.id,
+        });
 
-      done(null, { token });
-    } catch (err) {
-      done(err, null);
+        done(null, { token });
+      } catch (err) {
+        done(err, null);
+      }
     }
-  }
-));
+  ));
+} else {
+  console.warn("WARNING: Google OAuth credentials (GOOGLE_CLIENT_ID / GOOGLE_CLIENT_SECRET) not configured. Google login will be disabled.");
+}
 
 // ── GitHub Strategy ─────────────────────────────────────────────────────────
-passport.use(new GitHubStrategy(
-  {
-    clientID:     process.env.GITHUB_CLIENT_ID,
-    clientSecret: process.env.GITHUB_CLIENT_SECRET,
-    callbackURL:  `${BACKEND_URL}/api/auth/github/callback`,
-    scope: ['user:email'],
-  },
-  async (accessToken, refreshToken, profile, done) => {
-    try {
-      const email  = profile.emails?.[0]?.value;
-      const name   = profile.displayName || profile.username;
-      const avatar = profile.photos?.[0]?.value;
+if (process.env.GITHUB_CLIENT_ID && process.env.GITHUB_CLIENT_SECRET) {
+  passport.use(new GitHubStrategy(
+    {
+      clientID:     process.env.GITHUB_CLIENT_ID,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET,
+      callbackURL:  `${BACKEND_URL}/api/auth/github/callback`,
+      scope: ['user:email'],
+    },
+    async (accessToken, refreshToken, profile, done) => {
+      try {
+        const email  = profile.emails?.[0]?.value;
+        const name   = profile.displayName || profile.username;
+        const avatar = profile.photos?.[0]?.value;
 
-      if (!email) return done(new Error('No email from GitHub. Make sure your GitHub email is public or grant email scope.'), null);
+        if (!email) return done(new Error('No email from GitHub. Make sure your GitHub email is public or grant email scope.'), null);
 
-      const { token } = await findOrCreateOAuthUser({
-        email, name, avatar,
-        provider: 'github',
-        providerId: String(profile.id),
-      });
+        const { token } = await findOrCreateOAuthUser({
+          email, name, avatar,
+          provider: 'github',
+          providerId: String(profile.id),
+        });
 
-      done(null, { token });
-    } catch (err) {
-      done(err, null);
+        done(null, { token });
+      } catch (err) {
+        done(err, null);
+      }
     }
-  }
-));
+  ));
+} else {
+  console.warn("WARNING: GitHub OAuth credentials (GITHUB_CLIENT_ID / GITHUB_CLIENT_SECRET) not configured. GitHub login will be disabled.");
+}
 
 // Passport needs these even though we're using JWTs (not sessions)
 passport.serializeUser((user, done) => done(null, user));
