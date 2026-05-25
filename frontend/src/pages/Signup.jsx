@@ -5,7 +5,7 @@ import './Login.css';
 
 const OAuthButton = ({ provider, label, icon }) => (
   <a
-    href={`/api/auth/${provider}`}
+    href={`${import.meta.env.VITE_API_URL || ''}/api/auth/${provider}`}
     className={`oauth-btn oauth-btn--${provider}`}
   >
     {icon}
