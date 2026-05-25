@@ -13,7 +13,8 @@ const updateAqiData = async () => {
     isRunning = true;
     console.log("⏱ Fetching fresh AQI data...");
 
-    const python = spawn("python", ["predict.py"]);
+    const pythonCommand = process.platform === "win32" ? "python" : "python3";
+    const python = spawn(pythonCommand, ["predict.py"]);
     let buffer = "";
 
     python.stdout.on("data", data => {
