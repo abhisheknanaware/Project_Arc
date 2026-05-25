@@ -1,0 +1,269 @@
+/* ═══════════════════════════════════════════════════════════════
+   Project ARC — 3-D Cinematic Intro
+   Fonts: Bebas Neue (title) + Rajdhani (subtitle) from Google
+   ═══════════════════════════════════════════════════════════════ */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@300;400;600&display=swap');
+
+/* ── Overlay ──────────────────────────────────────────────────── */
+.arc-intro {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: #050508;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+
+  /* entrance */
+  animation: arcFadeIn 0.4s ease forwards;
+}
+
+@keyframes arcFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* exit */
+.arc-intro--exit {
+  animation: arcSlideUp 0.85s cubic-bezier(0.76, 0, 0.24, 1) forwards !important;
+  pointer-events: none;
+}
+
+@keyframes arcSlideUp {
+  0%   { opacity: 1; transform: translateY(0)   scale(1); }
+  60%  { opacity: 1; transform: translateY(-6%)  scale(1.02); }
+  100% { opacity: 0; transform: translateY(-18%) scale(1.04); }
+}
+
+/* ── Grain / noise overlay ─────────────────────────────────────── */
+.arc-intro__grain {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  /* SVG noise as data-URI — 100% GPU composited */
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  opacity: 0.55;
+  mix-blend-mode: overlay;
+}
+
+/* ── Three.js canvas mount ────────────────────────────────────── */
+.arc-intro__canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+}
+
+.arc-intro__canvas canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* ── Stage (centred content) ──────────────────────────────────── */
+.arc-intro__stage {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  /* subtle depth perspective */
+  perspective: 800px;
+}
+
+/* ── SVG logo wrapper ─────────────────────────────────────────── */
+.arc-intro__logo-wrap {
+  position: relative;
+  width: clamp(260px, 40vw, 420px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  animation: arcLogoReveal 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both;
+}
+
+@keyframes arcLogoReveal {
+  from { opacity: 0; transform: scale(0.82) translateY(10px); }
+  to   { opacity: 1; transform: scale(1)    translateY(0); }
+}
+
+.arc-intro__svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  filter: drop-shadow(0 0 14px rgba(0, 212, 255, 0.5));
+  animation: arcLogoPulse 2.8s ease-in-out 1.3s infinite alternate;
+}
+
+@keyframes arcLogoPulse {
+  from { filter: drop-shadow(0 0 12px rgba(0, 212, 255, 0.45)); }
+  to   { filter: drop-shadow(0 0 28px rgba(0, 212, 255, 0.9)) drop-shadow(0 0 60px rgba(0, 212, 255, 0.25)); }
+}
+
+/* ── SVG path draw animations ─────────────────────────────────── */
+.arc-path {
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  fill: none;
+}
+
+.arc-path--wave1 {
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  animation: arcDraw 1.2s cubic-bezier(0.4, 0, 0.2, 1) 0.2s forwards;
+}
+
+.arc-path--wave2 {
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  animation: arcDraw 1.0s cubic-bezier(0.4, 0, 0.2, 1) 0.5s forwards;
+}
+
+.arc-path--wave3 {
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  animation: arcDraw 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.8s forwards;
+}
+
+.arc-particle {
+  opacity: 0;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+.arc-particle--1 { animation: arcDotPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) 0.9s forwards; }
+.arc-particle--2 { animation: arcDotPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) 1.0s forwards; }
+.arc-particle--3 { animation: arcDotPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) 1.1s forwards; }
+.arc-particle--4 { animation: arcDotPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) 1.2s forwards; }
+.arc-particle--5 { animation: arcDotPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) 1.3s forwards; }
+.arc-particle--6 { animation: arcDotPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) 1.4s forwards; }
+
+@keyframes arcDraw {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes arcDotPop {
+  from { opacity: 0; transform: scale(0); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* ── SVG embedded text ─────────────────────────────────────────── */
+.arc-svg-label {
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: arcSvgTextIn 0.7s ease forwards;
+  animation-delay: 1.35s;
+}
+
+.arc-svg-name {
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+  filter: drop-shadow(0 0 10px rgba(0, 212, 255, 0.7));
+  animation: arcSvgNameIn 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: 1.55s;
+}
+
+@keyframes arcSvgTextIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes arcSvgNameIn {
+  from { opacity: 0; transform: translateY(12px) scale(0.92); }
+  to   { opacity: 1; transform: translateY(0)   scale(1); }
+}
+
+/* ── Glow ring behind logo ────────────────────────────────────── */
+.arc-intro__glow-ring {
+  position: absolute;
+  width: 140%;
+  height: 140%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(0,212,255,0.08) 0%, transparent 70%);
+  animation: arcRingPulse 3s ease-in-out 1.2s infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes arcRingPulse {
+  from { transform: scale(0.9); opacity: 0.6; }
+  to   { transform: scale(1.15); opacity: 1; }
+}
+
+/* ── Progress bar ─────────────────────────────────────────────── */
+.arc-intro__progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: rgba(255,255,255,0.05);
+  z-index: 20;
+}
+
+.arc-intro__progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #00D4FF, #C9A84C, #00D4FF);
+  background-size: 200% 100%;
+  animation:
+    arcProgressFill 4.2s linear forwards,
+    arcProgressShimmer 1.5s linear 0.5s infinite;
+}
+
+@keyframes arcProgressFill {
+  from { width: 0%; }
+  to   { width: 100%; }
+}
+
+@keyframes arcProgressShimmer {
+  from { background-position: 0% 0; }
+  to   { background-position: 200% 0; }
+}
+
+/* ── Skip button ──────────────────────────────────────────────── */
+.arc-intro__skip {
+  position: absolute;
+  top: 1.75rem;
+  right: 2rem;
+  z-index: 30;
+
+  background: transparent;
+  border: 1px solid rgba(0, 212, 255, 0.22);
+  color: rgba(232, 244, 255, 0.45);
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 0.4rem 1.1rem;
+  border-radius: 2px;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+
+  opacity: 0;
+  animation: arcSkipIn 0.6s ease forwards;
+  animation-delay: 1s;
+  transition: background 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+
+@keyframes arcSkipIn {
+  to { opacity: 1; }
+}
+
+.arc-intro__skip:hover {
+  background: rgba(0, 212, 255, 0.08);
+  border-color: rgba(0, 212, 255, 0.6);
+  color: #00D4FF;
+  box-shadow: 0 0 14px rgba(0, 212, 255, 0.2), inset 0 0 14px rgba(0, 212, 255, 0.05);
+}
+
+/* ── Responsive tweaks ────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .arc-intro__logo-wrap { width: clamp(200px, 72vw, 300px); }
+  .arc-intro__skip      { top: 1rem; right: 1rem; font-size: 0.68rem; padding: 0.35rem 0.8rem; }
+}

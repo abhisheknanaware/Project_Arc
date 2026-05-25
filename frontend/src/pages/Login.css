@@ -1,0 +1,182 @@
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 200px);
+  padding: 2rem;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 450px;
+  padding: 3rem;
+  background: linear-gradient(145deg, rgba(88, 166, 255, 0.05), rgba(13, 17, 23, 0.7));
+}
+
+.login-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.logo-icon {
+  font-size: 3.5rem;
+  color: var(--accent-color);
+  background: rgba(88, 166, 255, 0.1);
+  padding: 1rem;
+  border-radius: 50%;
+}
+
+.login-header h2 {
+  font-size: 2rem;
+  margin: 1.5rem 0 0.5rem;
+  color: white;
+}
+
+.login-header p {
+  color: var(--text-secondary);
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.input-group label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.input-group input {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-color);
+  color: white;
+  padding: 0.85rem 1rem;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.input-group input:focus {
+  border-color: var(--accent-color);
+}
+
+.success-message {
+  background: rgba(46, 160, 67, 0.15);
+  color: #3fb950;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  border: 1px solid rgba(46, 160, 67, 0.4);
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.error-message {
+  background: rgba(248, 81, 73, 0.15);
+  color: #f85149;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  border: 1px solid rgba(248, 81, 73, 0.4);
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.btn-block {
+  width: 100%;
+}
+
+.login-footer {
+  margin-top: 2rem;
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  border-top: 1px solid var(--border-color);
+  padding-top: 1.5rem;
+}
+
+.login-footer a {
+  color: var(--accent-color);
+  text-decoration: none;
+  font-weight: 600;
+  margin-left: 0.5rem;
+}
+
+.login-footer a:hover {
+  text-decoration: underline;
+}
+
+/* ── OAuth Buttons ───────────────────────────────── */
+.oauth-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.oauth-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  border: 1px solid var(--border-color);
+  font-family: inherit;
+}
+
+.oauth-btn--google {
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-primary);
+}
+
+.oauth-btn--google:hover {
+  background: rgba(255, 255, 255, 0.09);
+  border-color: rgba(66, 133, 244, 0.5);
+  box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.1);
+}
+
+.oauth-btn--github {
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-primary);
+}
+
+.oauth-btn--github:hover {
+  background: rgba(255, 255, 255, 0.09);
+  border-color: rgba(255, 255, 255, 0.35);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.06);
+}
+
+/* ── Divider ─────────────────────────────────────── */
+.auth-divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 1.25rem 0;
+  color: var(--text-secondary);
+  font-size: 0.82rem;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border-color);
+}
