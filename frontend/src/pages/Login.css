@@ -180,3 +180,20 @@
   height: 1px;
   background: var(--border-color);
 }
+
+/* ─── Responsive Media Queries ───────────────────────────────── */
+@media (max-width: 480px) {
+  .login-container {
+    padding: 1rem;
+    min-height: auto;
+  }
+
+  .login-card {
+    padding: 2rem 1.5rem;
+    border-radius: 16px;
+  }
+
+  .login-header h2 {
+    font-size: 1.75rem;
+  }
+}

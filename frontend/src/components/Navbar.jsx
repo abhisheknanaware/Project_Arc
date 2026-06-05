@@ -1,18 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink, Link, useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
   const token = localStorage.getItem('token');
   const navigate = useNavigate();
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleLogout = () => {
     localStorage.removeItem('token');
+    setIsOpen(false);
     navigate('/login');
+  };
+
+  const closeMenu = () => {
+    setIsOpen(false);
   };
 
   return (
     <nav className="navbar glass-panel">
-      <Link to="/" className="logo">
+      <Link to="/" className="logo" onClick={closeMenu}>
         {/* Project ARC — Air/Atmosphere SVG Logo */}
         <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" className="logo-svg">
           <defs>
@@ -74,21 +80,30 @@ const Navbar = () => {
         </svg>
         Project <span>ARC</span>
       </Link>
-      <div className="nav-links">
-        <NavLink to="/" className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}>Home</NavLink>
-        <NavLink to="/aqi" className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}>AQI Explorer</NavLink>
-        <NavLink to="/aboutus" className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}>About Us</NavLink>
-        <NavLink to="/contactus" className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}>Contact Us</NavLink>
-      </div>
-      <div className="auth-buttons">
-        {token ? (
-          <button onClick={handleLogout} className="btn btn-outline">Logout</button>
-        ) : (
-          <>
-            <Link to="/login" className="btn btn-text" style={{ marginRight: '1rem' }}>Login</Link>
-            <Link to="/signup" className="btn btn-primary">Sign Up</Link>
-          </>
-        )}
+
+      <button className="nav-toggle" onClick={() => setIsOpen(!isOpen)} aria-label="Toggle navigation">
+        <span className="material-symbols-outlined">
+          {isOpen ? 'close' : 'menu'}
+        </span>
+      </button>
+
+      <div className={`nav-menu ${isOpen ? 'active' : ''}`}>
+        <div className="nav-links" onClick={closeMenu}>
+          <NavLink to="/" className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}>Home</NavLink>
+          <NavLink to="/aqi" className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}>AQI Explorer</NavLink>
+          <NavLink to="/aboutus" className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}>About Us</NavLink>
+          <NavLink to="/contactus" className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}>Contact Us</NavLink>
+        </div>
+        <div className="auth-buttons" onClick={closeMenu}>
+          {token ? (
+            <button onClick={handleLogout} className="btn btn-outline">Logout</button>
+          ) : (
+            <>
+              <Link to="/login" className="btn btn-text login-link">Login</Link>
+              <Link to="/signup" className="btn btn-primary">Sign Up</Link>
+            </>
+          )}
+        </div>
       </div>
     </nav>
   );

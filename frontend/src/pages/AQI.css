@@ -607,3 +607,164 @@ body.light-theme {
 
 /* ─── Misc / Shared ──────────────────────────────────────────── */
 .divider { height: 1px; background: var(--border-color); margin: 1.5rem 0; }
+
+/* ─── Responsive Media Queries ───────────────────────────────── */
+@media (max-width: 992px) {
+  .aqi-container {
+    padding: 1rem 3% 4rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .aqi-container {
+    padding: 1rem 1.25rem 3rem;
+  }
+
+  /* Top Bar */
+  .top-bar {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 1.25rem;
+    gap: 1rem;
+  }
+
+  .top-bar-left {
+    margin-right: 0;
+    justify-content: center;
+  }
+
+  .top-bar-filters {
+    flex-direction: column;
+    gap: 0.85rem;
+    width: 100%;
+  }
+
+  .filter-group {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    gap: 0.4rem;
+  }
+
+  .filter-group label {
+    align-self: flex-start;
+  }
+
+  .custom-select {
+    width: 100%;
+  }
+
+  .select-trigger {
+    width: 100%;
+  }
+
+  .top-bar-right {
+    margin-left: 0;
+    justify-content: space-between;
+    width: 100%;
+    border-top: 1px solid var(--border-color);
+    padding-top: 0.75rem;
+    margin-top: 0.25rem;
+  }
+
+  /* Map */
+  .map-container {
+    height: 380px;
+    margin-bottom: 2rem;
+  }
+
+  /* Cards */
+  .cards-header {
+    margin-bottom: 1.5rem;
+  }
+
+  .grid-cards {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1rem;
+  }
+
+  /* Modal */
+  .modal-overlay {
+    padding: 1rem 0.5rem;
+  }
+
+  .modal-card {
+    border-radius: 16px;
+    max-height: 94vh;
+  }
+
+  .modal-header {
+    padding: 1.25rem 1.25rem 1rem;
+  }
+
+  .modal-location-name {
+    font-size: 1.3rem;
+  }
+
+  .modal-body {
+    padding: 0 1.25rem 1.5rem;
+  }
+
+  .modal-aqi-hero {
+    gap: 1rem;
+    padding: 1.1rem;
+  }
+
+  .modal-aqi-score {
+    font-size: 3.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-aqi-hero {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .modal-aqi-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .modal-stats-row {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+  }
+
+  .modal-stat-card {
+    padding: 0.65rem;
+    gap: 0.4rem;
+  }
+
+  .modal-stat-card .material-symbols-outlined {
+    font-size: 1.2rem;
+  }
+
+  .msc-value {
+    font-size: 0.85rem;
+  }
+
+  .modal-pollutants-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+  }
+
+  .modal-pol-card {
+    padding: 0.65rem;
+    gap: 0.4rem;
+  }
+
+  .modal-pol-icon {
+    font-size: 1rem;
+  }
+
+  .modal-pol-value {
+    font-size: 0.95rem;
+  }
+
+  .modal-pol-unit {
+    font-size: 0.58rem;
+  }
+}
